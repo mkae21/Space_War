@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b107580709ef948a8512ae1c7125eb, type: 3}
+  m_Name: Rifle Data
+  m_EditorClassIdentifier: 
+  damage: 50
+  ammoCapacity: 30
+  reloadingTime: 3
+  shootingRate: 0.3
+  shootingRange: 20
+  fireVelocity: 45
