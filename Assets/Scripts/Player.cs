@@ -22,6 +22,7 @@ public class Player : LivingEntity
     [SerializeField] private float detectRadius = 0.8f;
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float sprintSpeed = 9.5f;
+
     //[SerializeField] private Transform aimTarget;
 
     private Vector3 moveVelocity;
@@ -88,6 +89,7 @@ public class Player : LivingEntity
         {
             animator.SetTrigger("Die");
             playerInput.enabled = false;
+            isDead = false;
             moveVelocity = Vector3.zero;
         }
     }
@@ -183,10 +185,6 @@ public class Player : LivingEntity
             }
         }
     }
-
-
-    
-    
 
 
 }
