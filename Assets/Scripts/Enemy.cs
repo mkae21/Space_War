@@ -37,6 +37,7 @@ public class Enemy : LivingEntity
     private const float radius = 1f;
     private const float eyeHeight = 1.0f;
     private const float range = 1f;
+    
 
 
 

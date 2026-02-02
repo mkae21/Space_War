@@ -22,7 +22,6 @@ public class GunController : MonoBehaviour
     private Gun currentGun;
     private GunData currentData;
     private PlayerInput playerInput;
-    private Animator animator;
 
     private void Start()
     {
@@ -32,7 +31,6 @@ public class GunController : MonoBehaviour
             EquipGun(startingGun);
         }
 
-        animator = GetComponent<Animator>();
     }
 
     //private void Update()
@@ -69,13 +67,6 @@ public class GunController : MonoBehaviour
         //총을 가지고 있을 경우에 가능
         if(equippedGun != null)
             equippedGun.Shoot();
-    }
-
-    //Gun Animation IK
-    private void OnAnimatorIK(int layerIndex)
-    {
-        weaponHolder.position = animator.GetIKHintPosition(AvatarIKHint.RightElbow);
-
     }
 
 }

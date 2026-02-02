@@ -15,6 +15,7 @@ MonoBehaviour:
   id: Human
   health: 50
   damage: 10
-  speed: 10
+  speed: 7
   prefab: {fileID: 2077234810107370386, guid: be4ae7aea9e39de46b0bf930c1d93598, type: 3}
   runtimeAnimationController: {fileID: 9100000, guid: 6aec9b84c619ba44c9c262bfa4ef6228, type: 2}
+  yPosition: 0

@@ -9,7 +9,9 @@ public class LivingEntity : MonoBehaviour,IDamageable
     //체력 관리 시스템
     [SerializeField] public float startingHealth = 100f;
     protected float health { get; private set; }
-    public bool isDead { get; private set; }
+    public bool isDead { get; protected set; }
+    
+    public event Action onDeath;
 
     //public event Action OnDeath;
 
@@ -32,8 +34,8 @@ public class LivingEntity : MonoBehaviour,IDamageable
     }
     protected virtual void Die()
     {
-        if (isDead)
-            return;
+        if (onDeath != null)
+            onDeath();
 
         isDead = true;
     }

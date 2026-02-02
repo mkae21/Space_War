@@ -6,6 +6,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     public Transform firePosition;
+    public Transform rightHandMount;
     public Projectile bullet;
 
     private AudioSource audioSource;
