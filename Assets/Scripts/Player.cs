@@ -95,12 +95,8 @@ public class Player : LivingEntity
     }
 
 
-    private void UpdateAnimator()
-    {
-        animator.SetBool("Run", isRunning);
-        animator.SetBool("Walk", isMoving);
-    }
-    
+
+
     private void BodyRotate()
     {
         //Look Input
@@ -112,7 +108,6 @@ public class Player : LivingEntity
         if (groundPlane.Raycast(ray, out rayDistance))
         {
             Vector3 point = ray.GetPoint(rayDistance);
-
 
             Vector3 targetPoint = new Vector3(point.x, transform.position.y, point.z);
             Vector3 dir = targetPoint - rb.position;
@@ -132,6 +127,7 @@ public class Player : LivingEntity
         //입력 값
         float h = playerInput.moveHorizontal;
         float v = playerInput.moveVertical;
+        Vector2 input = new Vector2(h, v);
 
         Vector3 camForward = viewCamera.transform.forward;
         Vector3 camRight = viewCamera.transform.right;
@@ -146,12 +142,45 @@ public class Player : LivingEntity
 
         Vector3 targetDir = camRight * h + camForward * v;
 
-        isMoving = (targetDir.sqrMagnitude > 0.01f ? true : false);
+        isMoving = (input.sqrMagnitude > 0.01f ? true : false);
         isRunning = (isMoving && playerInput.leftShiftButtonPushed ? true : false);
         
         currentSpeed = (isMoving && !isDead ? (isRunning ? sprintSpeed : walkSpeed) : 0f);
         moveVelocity = (isMoving && !isDead ? targetDir.normalized * currentSpeed : Vector3.zero);
 
+        UpdateAnimator();
+    }
+
+    private void UpdateAnimator()
+    {
+        // 움직이지 않으면 0으로 설정
+        if (!isMoving || isDead)
+        {
+            animator.SetFloat("MoveX", 0f, 0.1f, Time.deltaTime);
+            animator.SetFloat("MoveY", 0f, 0.1f, Time.deltaTime);
+            return;
+        }
+
+        // 월드 이동 방향(카메라 기준으로 만든 targetDir)을 캐릭터 로컬로 변환
+        Vector3 worldDir = moveVelocity.normalized;
+        Vector3 localDir = transform.InverseTransformDirection(worldDir); //world 방향을 local 기준으로 변경
+
+        // localDir.x: 좌(-)우(+), localDir.z: 뒤(-)앞(+)
+
+        //Running일 경우만 0.5이상의 값을 갖는다.
+        float moveX = localDir.x;
+        float moveY = localDir.z;
+
+        //걷기
+        if(!isRunning)
+        {
+            moveX = isRunning ? localDir.x : Mathf.Clamp(moveX, -0.5f, 0.5f);
+            moveY = isRunning ? localDir.z : Mathf.Clamp(moveY, -0.5f, 0.5f);
+        }
+
+        animator.SetFloat("MoveX", moveX, 0.1f, Time.deltaTime);
+        animator.SetFloat("MoveY", moveY, 0.1f, Time.deltaTime);
+    
     }
 
     private void Move()
