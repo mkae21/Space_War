@@ -6,7 +6,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     public Transform firePosition;
-    public Transform rightHandMount;
+    //public Transform rightHandMount;
     public Projectile bullet;
 
     private AudioSource audioSource;
@@ -15,11 +15,13 @@ public class Gun : MonoBehaviour
     private float fireVelocity;
 
     private GunData data;
+    private Animator animator;
     private float lastShotTime;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
     }
 
     //장착 될 때 외부에서 주입
@@ -43,6 +45,7 @@ public class Gun : MonoBehaviour
             Projectile newProjectile = Instantiate(bullet, firePosition.position, firePosition.rotation) as Projectile;
             newProjectile.Init(data);
             audioSource.PlayOneShot(audioSource.clip);
+            animator.SetTrigger("Shot");
         }
 
     }
