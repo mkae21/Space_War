@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PoolManager : MonoBehaviour
 {
@@ -35,15 +36,20 @@ public class PoolManager : MonoBehaviour
 
         //이미 해당 enemy의 id queue가 존재할 경우
         if (enemyPools.ContainsKey(enemyData.id))
+        {
+            Debug.LogError("이미 Pool이 존재합니다");
             return;
+        }
 
         //id에 따른 Queue를 생성
+        //size가 100인 queue
         enemyPools[enemyData.id] = new Queue<Enemy>(initCount);
 
         //큐에 넣기
         InstantiateEnemy(enemyData, enemyPools[enemyData.id], initCount);
 
         Debug.Log("Pool 생성 완료!");
+        Debug.Log($"현재 Pool의 길이: {enemyPools.Count}");
     }
 
     public Enemy GetEnemy(EnemyDataSO enemyData, Vector3 pos, Quaternion rot)
@@ -52,6 +58,7 @@ public class PoolManager : MonoBehaviour
         if(!enemyPools.ContainsKey(enemyData.id))
         {
             CreateEnemyPool(enemyData);
+            Debug.Log("Pool 없음, 생성");
         }
 
         //해당 queue에서 하나 빼온다.
@@ -107,11 +114,13 @@ public class PoolManager : MonoBehaviour
                 int id = enemy.GetInstanceID();
                 enemyId[id] = enemyData.id;
 
-                e.SetActive(false);
                 q.Enqueue(enemy);
+                e.SetActive(false);
             }
 
         }
+
+        Debug.Log($"생성된 Enemy 숫자: {q.Count}");
     }
 
     //살아있는 Enemy 리스트로 관리하기 위한, List 추가 , List 삭제 구현

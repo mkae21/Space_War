@@ -118,6 +118,9 @@ public class Enemy : LivingEntity
     //수정 필요
     public void ChasingPlayer()
     {
+        if (isDead)
+            return;
+
         Vector3 playerPos = EnemyManager.playerPosition;
         Vector3 dir = playerPos - rb.position;
         dir.Normalize();
@@ -128,6 +131,9 @@ public class Enemy : LivingEntity
     
     public void RotateToPlayer()
     {
+        if (isDead)
+            return;
+
         Vector3 dir = EnemyManager.playerPosition - rb.position;
         dir.y = 0f; // 높낮이는 삭제
 
@@ -187,12 +193,15 @@ public class Enemy : LivingEntity
         //나중에 Enemy Damage Effect 추가
     }
 
+    
     private IEnumerator DieRoutine()
     {
         animator.SetTrigger("Die");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
+
         GameManager.Instance.PoolManager.RemoveInList(this);
         GameManager.Instance.PoolManager.EnqueueForReuse(this);
+        StopCoroutine(CheckLineOfSight());
     }
 
 }

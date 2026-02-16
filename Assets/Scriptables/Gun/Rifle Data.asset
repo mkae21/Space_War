@@ -12,9 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b107580709ef948a8512ae1c7125eb, type: 3}
   m_Name: Rifle Data
   m_EditorClassIdentifier: 
+  prefab: {fileID: 1758862130100318767, guid: 4437a2cbe42e38d40a6274bf5a7438a7, type: 3}
   damage: 50
   ammoCapacity: 30
   reloadingTime: 3
   shootingRate: 0.3
   shootingRange: 20
-  fireVelocity: 45
+  fireVelocity: 80
+  posX: 0.0692
+  posY: -0.036
+  posZ: 0.014
+  roatX: 0.153
+  roatY: 89.795
+  roatZ: 89.79
+  playerUppderBodyAnimation: {fileID: 22100000, guid: b1c7c9f826dda444ca013bcd48f5c206, type: 2}

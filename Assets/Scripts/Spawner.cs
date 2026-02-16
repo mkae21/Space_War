@@ -25,6 +25,7 @@ public class Spawner : MonoBehaviour
 
     private void Awake()
     {
+
     }
 
     private void Start()

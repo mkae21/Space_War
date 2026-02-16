@@ -45,7 +45,6 @@ public class Player : LivingEntity
 
     void Update()
     {
-
         if (isDead)
             return;
 
@@ -67,6 +66,9 @@ public class Player : LivingEntity
 
     private void FixedUpdate()
     {
+        if (isDead)
+            return;
+
         Move();
         BodyRotate();
     }
@@ -78,24 +80,31 @@ public class Player : LivingEntity
         return playerPos;
     }
 
+    //사망시 
+
     public override void onDamage(float damage, Vector3 hitPoint, Vector3 hitNormal)
     {
-        base.onDamage(damage, hitPoint, hitNormal);
+        //사망하지 않았을 경우
+        if(!isDead)
+            base.onDamage(damage, hitPoint, hitNormal);
 
         //나중에 hit Effect 추가 연출할 것.
         //Debug.Log("Player On Damaged !!");
-
-        if (isDead)
-        {
-            animator.SetTrigger("Die");
-            playerInput.enabled = false;
-            isDead = false;
-            moveVelocity = Vector3.zero;
-        }
     }
 
+    protected override void Die()
+    {
+        base.Die();//isDead == true
 
+        animator.SetTrigger("Die");
+        playerInput.enabled = false;
 
+        //속도 초기화 및 물리 충돌 금지
+        moveVelocity = Vector3.zero;
+        rb.velocity = Vector3.zero;
+        rb.isKinematic = true;
+    }
+    
 
     private void BodyRotate()
     {
@@ -111,6 +120,12 @@ public class Player : LivingEntity
 
             Vector3 targetPoint = new Vector3(point.x, transform.position.y, point.z);
             Vector3 dir = targetPoint - rb.position;
+
+            RaycastHit hit;
+            if(Physics.Raycast(ray,out hit,rayDistance, targetLayer,QueryTriggerInteraction.Collide))
+            {
+
+            }
 
             //너무 값이 적으면 회전 X
             if (dir.sqrMagnitude < 0.001f)

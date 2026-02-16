@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68deb8cd45379974088036f89bab8180, type: 3}
   m_Name: Big
   m_EditorClassIdentifier: 
-  id: Human
+  id: Zombie
   health: 50
   damage: 10
-  speed: 7
-  prefab: {fileID: 2077234810107370386, guid: be4ae7aea9e39de46b0bf930c1d93598, type: 3}
-  runtimeAnimationController: {fileID: 9100000, guid: 6aec9b84c619ba44c9c262bfa4ef6228, type: 2}
+  speed: 2
+  prefab: {fileID: 2763777865350280414, guid: 3b3bfe9f7abb9614d8317ec1ac8b7b41, type: 3}
+  runtimeAnimationController: {fileID: 9100000, guid: d8774ac82bdf0fd4bbf67d8acfbb4954, type: 2}
   yPosition: 0

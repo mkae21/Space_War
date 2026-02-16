@@ -12,9 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b107580709ef948a8512ae1c7125eb, type: 3}
   m_Name: Pisotol Data
   m_EditorClassIdentifier: 
-  damage: 30
-  ammoCapacity: 15
-  reloadingTime: 8
-  shootingRate: 10
-  shootingRange: 10
-  fireVelocity: 25
+  prefab: {fileID: 3870270973868856161, guid: dbf4adce67c67a147b05aedf8c3ffee2, type: 3}
+  damage: 10
+  ammoCapacity: 8
+  reloadingTime: 5
+  shootingRate: 25
+  shootingRange: 8
+  fireVelocity: 50
+  posX: 0.062
+  posY: -0.032
+  posZ: -0.004
+  roatX: 0.153
+  roatY: 89.795
+  roatZ: 89.79
+  playerUppderBodyAnimation: {fileID: 22100000, guid: 87a5d06d5e8270946a16152673f1b569, type: 2}
